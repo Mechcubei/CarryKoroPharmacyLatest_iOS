@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Pharmacy.xcodeproj">
+   </FileRef>
+   <Group
+      location = "group:Pharmacy/../Pods"
+      name = "Pods">
+      <FileRef
+         location = "group:Pods/Target Support Files/Pods-Pharmacy/Pods-Pharmacy.debug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Pods/Target Support Files/Pods-Pharmacy/Pods-Pharmacy.release.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Pods/Target Support Files/Pods-Pharmacy-PharmacyUITests/Pods-Pharmacy-PharmacyUITests.debug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Pods/Target Support Files/Pods-Pharmacy-PharmacyUITests/Pods-Pharmacy-PharmacyUITests.release.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Pods/Target Support Files/Pods-PharmacyTests/Pods-PharmacyTests.debug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:Pods/Target Support Files/Pods-PharmacyTests/Pods-PharmacyTests.release.xcconfig">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>

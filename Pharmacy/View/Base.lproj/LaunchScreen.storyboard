@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="ZGC-7c-que">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-carryKORO" translatesAutoresizingMaskIntoConstraints="NO" id="I2k-zV-UZK">
+                                <rect key="frame" x="83" y="318.5" width="248" height="269"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ZGC-7c-que" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="779-PG-yjx"/>
+                            <constraint firstItem="ZGC-7c-que" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="Ajm-PH-cRj"/>
+                            <constraint firstItem="I2k-zV-UZK" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.3" id="Dcl-6M-ohz"/>
+                            <constraint firstItem="I2k-zV-UZK" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="5" id="WJM-aE-GJj"/>
+                            <constraint firstItem="I2k-zV-UZK" firstAttribute="centerX" secondItem="ZGC-7c-que" secondAttribute="centerX" id="YOP-V9-5P9"/>
+                            <constraint firstItem="ZGC-7c-que" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="iac-8n-Iba"/>
+                            <constraint firstItem="I2k-zV-UZK" firstAttribute="width" secondItem="ZGC-7c-que" secondAttribute="width" multiplier="0.6" id="sdQ-Q9-4Uk"/>
+                            <constraint firstItem="ZGC-7c-que" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="xt8-kP-ftf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="background" width="540" height="960"/>
+        <image name="logo-carryKORO" width="2000" height="1600"/>
+    </resources>
+</document>

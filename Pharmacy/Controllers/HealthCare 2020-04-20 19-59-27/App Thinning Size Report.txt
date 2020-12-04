@@ -1,0 +1,155 @@
+
+App Thinning Size Report for All Variants of HealthCare
+
+Variant: HealthCare-04CD6148-BB83-4FF2-BEB2-1A1AB354558B.ipa
+Supported variant descriptors: [device: iPhone9,3, os-version: 12.2], [device: iPhone10,1, os-version: 12.2], [device: iPhone9,1, os-version: 12.2], and [device: iPhone10,4, os-version: 12.2]
+App + On Demand Resources size: 10.1 MB compressed, 20.4 MB uncompressed
+App size: 10.1 MB compressed, 20.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-19911F12-C1A9-4B32-A25B-7FF490DD35D0.ipa
+Supported variant descriptors: [device: iPhone8,4, os-version: 13.0], [device: iPod9,1, os-version: 13.0], and [device: iPhone8,1, os-version: 13.0]
+App + On Demand Resources size: 10.1 MB compressed, 20.4 MB uncompressed
+App size: 10.1 MB compressed, 20.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-1B93788C-65C4-47E4-AFBB-63D4024AD264.ipa
+Supported variant descriptors: [device: iPhone10,5, os-version: 12.2], [device: iPhone10,2, os-version: 12.2], [device: iPhone11,6, os-version: 12.2], [device: iPhone11,2, os-version: 12.2], [device: iPhone9,4, os-version: 12.2], [device: iPhone10,3, os-version: 12.2], [device: iPhone11,4, os-version: 12.2], [device: iPhone9,2, os-version: 12.2], and [device: iPhone10,6, os-version: 12.2]
+App + On Demand Resources size: 10.6 MB compressed, 20.9 MB uncompressed
+App size: 10.6 MB compressed, 20.9 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-2DBE01A2-3192-4790-AB72-FC7FF0D56E9F.ipa
+Supported variant descriptors: [device: iPhone10,5, os-version: 12.0], [device: iPhone9,2, os-version: 12.0], [device: iPhone9,4, os-version: 12.0], [device: iPhone11,6, os-version: 12.0], [device: iPhone10,2, os-version: 12.0], [device: iPhone11,2, os-version: 12.0], [device: iPhone10,3, os-version: 12.0], [device: iPhone11,4, os-version: 12.0], and [device: iPhone10,6, os-version: 12.0]
+App + On Demand Resources size: 13 MB compressed, 27.8 MB uncompressed
+App size: 13 MB compressed, 27.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-315004E9-6EEB-4F45-8871-9C13F8FB09FC.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12.2]
+App + On Demand Resources size: 10.1 MB compressed, 20.5 MB uncompressed
+App size: 10.1 MB compressed, 20.5 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-37477619-7C3D-47A1-B653-2D964A9905D8.ipa
+Supported variant descriptors: [device: iPhone7,1, os-version: 12.0] and [device: iPhone8,2, os-version: 12.0]
+App + On Demand Resources size: 13 MB compressed, 27.8 MB uncompressed
+App size: 13 MB compressed, 27.8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-4B678AAB-B5A9-4406-93EF-0B51207E5BEC.ipa
+Supported variant descriptors: [device: iPad4,9, os-version: 12.0], [device: iPad6,12, os-version: 12.0], [device: iPad4,1, os-version: 12.0], [device: iPad4,7, os-version: 12.0], [device: iPad5,4, os-version: 12.0], [device: iPad4,5, os-version: 12.0], [device: iPad5,3, os-version: 12.0], [device: iPad6,11, os-version: 12.0], [device: iPad4,3, os-version: 12.0], [device: iPad6,8, os-version: 12.0], [device: iPad6,7, os-version: 12.0], [device: iPad4,8, os-version: 12.0], [device: iPad5,2, os-version: 12.0], [device: iPad4,6, os-version: 12.0], [device: iPad4,2, os-version: 12.0], [device: iPad7,5, os-version: 12.0], [device: iPad7,6, os-version: 12.0], [device: iPad4,4, os-version: 12.0], and [device: iPad5,1, os-version: 12.0]
+App + On Demand Resources size: 12.5 MB compressed, 27.3 MB uncompressed
+App size: 12.5 MB compressed, 27.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-4D43D27D-F752-48AF-9ABC-D0BE2B9538CA.ipa
+Supported variant descriptors: [device: iPhone7,2, os-version: 12.2], [device: iPhone8,1, os-version: 12.2], [device: iPhone8,4, os-version: 12.2], [device: iPod9,1, os-version: 12.2], [device: iPhone6,2, os-version: 12.2], [device: iPhone6,1, os-version: 12.2], and [device: iPod7,1, os-version: 12.2]
+App + On Demand Resources size: 10.1 MB compressed, 20.4 MB uncompressed
+App size: 10.1 MB compressed, 20.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-68C2BE04-8802-42E8-A52B-A718D1249478.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 13.0] and [device: iPhone12,1, os-version: 13.0]
+App + On Demand Resources size: 10.1 MB compressed, 20.4 MB uncompressed
+App size: 10.1 MB compressed, 20.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-6C556517-0203-45ED-8A6B-371183CBF33C.ipa
+Supported variant descriptors: [device: iPhone9,1, os-version: 13.0], [device: iPhone9,3, os-version: 13.0], [device: iPhone10,1, os-version: 13.0], and [device: iPhone10,4, os-version: 13.0]
+App + On Demand Resources size: 10.1 MB compressed, 20.4 MB uncompressed
+App size: 10.1 MB compressed, 20.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-785FCF05-5047-41D4-82A8-CD803685F7D0.ipa
+Supported variant descriptors: [device: iPhone8,4, os-version: 12.0], [device: iPhone6,1, os-version: 12.0], [device: iPhone7,2, os-version: 12.0], [device: iPhone8,1, os-version: 12.0], [device: iPhone6,2, os-version: 12.0], and [device: iPod7,1, os-version: 12.0]
+App + On Demand Resources size: 12.5 MB compressed, 27.3 MB uncompressed
+App size: 12.5 MB compressed, 27.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-91678943-DAB2-491F-8617-AC01FCABFB76.ipa
+Supported variant descriptors: [device: iPhone9,4, os-version: 13.0], [device: iPhone10,2, os-version: 13.0], [device: iPhone10,5, os-version: 13.0], [device: iPhone11,4, os-version: 13.0], [device: iPhone10,6, os-version: 13.0], [device: iPhone9,2, os-version: 13.0], [device: iPhone12,5, os-version: 13.0], [device: iPhone12,3, os-version: 13.0], [device: iPhone11,2, os-version: 13.0], [device: iPhone10,3, os-version: 13.0], and [device: iPhone11,6, os-version: 13.0]
+App + On Demand Resources size: 10.6 MB compressed, 20.9 MB uncompressed
+App size: 10.6 MB compressed, 20.9 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-99263661-A244-4AAA-BC07-A3924070A1EB.ipa
+Supported variant descriptors: [device: iPad8,7, os-version: 12.0], [device: iPad7,3, os-version: 12.0], [device: iPad8,1, os-version: 12.0], [device: iPad8,8, os-version: 12.0], [device: iPad6,3, os-version: 12.0], [device: iPad6,4, os-version: 12.0], [device: iPad8,2, os-version: 12.0], [device: iPad8,3, os-version: 12.0], [device: iPad8,4, os-version: 12.0], [device: iPad8,6, os-version: 12.0], [device: iPad7,4, os-version: 12.0], [device: iPad7,2, os-version: 12.0], [device: iPad7,1, os-version: 12.0], and [device: iPad8,5, os-version: 12.0]
+App + On Demand Resources size: 12.5 MB compressed, 27.3 MB uncompressed
+App size: 12.5 MB compressed, 27.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-A2D97A6F-6AF1-43A9-80BE-62C5720AEEF4.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12.0]
+App + On Demand Resources size: 12.5 MB compressed, 27.3 MB uncompressed
+App size: 12.5 MB compressed, 27.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-AE4AC460-2B4C-4B3C-8270-A320514E7543.ipa
+Supported variant descriptors: [device: iPhone8,2, os-version: 13.0]
+App + On Demand Resources size: 10.6 MB compressed, 20.9 MB uncompressed
+App size: 10.6 MB compressed, 20.9 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-B44E99DD-A610-4078-AF8A-37AC573B6840.ipa
+Supported variant descriptors: [device: iPad5,3, os-version: 13.0], [device: iPad5,2, os-version: 13.0], [device: iPad6,11, os-version: 13.0], [device: iPad6,12, os-version: 13.0], [device: iPad6,7, os-version: 13.0], [device: iPad5,1, os-version: 13.0], [device: iPad5,4, os-version: 13.0], [device: iPad7,12, os-version: 13.0], [device: iPad7,6, os-version: 13.0], [device: iPad6,8, os-version: 13.0], [device: iPad7,5, os-version: 13.0], and [device: iPad7,11, os-version: 13.0]
+App + On Demand Resources size: 10.1 MB compressed, 20.4 MB uncompressed
+App size: 10.1 MB compressed, 20.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-C86773A4-294C-4C41-ADE4-FB45F2B1AA99.ipa
+Supported variant descriptors: [device: iPhone9,3, os-version: 12.0], [device: iPhone10,4, os-version: 12.0], [device: iPhone9,1, os-version: 12.0], and [device: iPhone10,1, os-version: 12.0]
+App + On Demand Resources size: 12.5 MB compressed, 27.3 MB uncompressed
+App size: 12.5 MB compressed, 27.3 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-D149F457-CBD8-4965-A652-D473CF5F7D41.ipa
+Supported variant descriptors: [device: iPad7,4, os-version: 13.0], [device: iPad8,6, os-version: 13.0], [device: iPad8,7, os-version: 13.0], [device: iPad8,8, os-version: 13.0], [device: iPad7,3, os-version: 13.0], [device: iPad11,2, os-version: 13.0], [device: iPad8,3, os-version: 13.0], [device: iPad8,2, os-version: 13.0], [device: iPad7,2, os-version: 13.0], [device: iPad11,1, os-version: 13.0], [device: iPad8,4, os-version: 13.0], [device: iPad11,4, os-version: 13.0], [device: iPad8,1, os-version: 13.0], [device: iPad7,1, os-version: 13.0], [device: iPad11,3, os-version: 13.0], [device: iPad6,3, os-version: 13.0], [device: iPad6,4, os-version: 13.0], and [device: iPad8,5, os-version: 13.0]
+App + On Demand Resources size: 10.1 MB compressed, 20.4 MB uncompressed
+App size: 10.1 MB compressed, 20.4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-F2D17B10-628F-4849-A638-BF70C28A751C.ipa
+Supported variant descriptors: [device: iPad4,5, os-version: 12.2], [device: iPad4,9, os-version: 12.2], [device: iPad6,12, os-version: 12.2], [device: iPad5,2, os-version: 12.2], [device: iPad5,4, os-version: 12.2], [device: iPad7,5, os-version: 12.2], [device: iPad4,8, os-version: 12.2], [device: iPad4,3, os-version: 12.2], [device: iPad6,8, os-version: 12.2], [device: iPad7,6, os-version: 12.2], [device: iPad4,2, os-version: 12.2], [device: iPad4,7, os-version: 12.2], [device: iPad6,7, os-version: 12.2], [device: iPad4,4, os-version: 12.2], [device: iPad4,6, os-version: 12.2], [device: iPad6,11, os-version: 12.2], [device: iPad4,1, os-version: 12.2], [device: iPad5,3, os-version: 12.2], and [device: iPad5,1, os-version: 12.2]
+App + On Demand Resources size: 10.1 MB compressed, 20.5 MB uncompressed
+App size: 10.1 MB compressed, 20.5 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-F49CACC6-0AFA-4FB4-B4F4-40044DE8A5F3.ipa
+Supported variant descriptors: [device: iPad11,1, os-version: 12.2], [device: iPad8,4, os-version: 12.2], [device: iPad11,3, os-version: 12.2], [device: iPad8,7, os-version: 12.2], [device: iPad11,2, os-version: 12.2], [device: iPad7,4, os-version: 12.2], [device: iPad6,3, os-version: 12.2], [device: iPad6,4, os-version: 12.2], [device: iPad11,4, os-version: 12.2], [device: iPad8,8, os-version: 12.2], [device: iPad7,1, os-version: 12.2], [device: iPad8,5, os-version: 12.2], [device: iPad7,3, os-version: 12.2], [device: iPad8,1, os-version: 12.2], [device: iPad8,3, os-version: 12.2], [device: iPad7,2, os-version: 12.2], [device: iPad8,2, os-version: 12.2], and [device: iPad8,6, os-version: 12.2]
+App + On Demand Resources size: 10.1 MB compressed, 20.5 MB uncompressed
+App size: 10.1 MB compressed, 20.5 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare-F51268D6-72AF-4637-B116-E6094AB93CF8.ipa
+Supported variant descriptors: [device: iPhone7,1, os-version: 12.2] and [device: iPhone8,2, os-version: 12.2]
+App + On Demand Resources size: 10.6 MB compressed, 20.9 MB uncompressed
+App size: 10.6 MB compressed, 20.9 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: HealthCare.ipa
+Supported variant descriptors: Universal
+App + On Demand Resources size: 20.4 MB compressed, 35.9 MB uncompressed
+App size: 20.4 MB compressed, 35.9 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
