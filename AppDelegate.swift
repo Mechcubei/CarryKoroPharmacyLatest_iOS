@@ -75,11 +75,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate,UNUserNotificationCenterDe
           deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
           print(deviceTokenString)
           UserDefaults.standard.setValue(deviceToken, forKey: deviceTokenString)
-      }
-      
-      func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    }
+    
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
           print("i am not available in simulator :( \(error)")
-      }
+    }
     
       func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
           // If you are receiving a notification message while your app is in the background,

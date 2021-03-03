@@ -22,5 +22,6 @@ let phoneStatus : String
 let banner : String
 let landline : String
 let rating: String
+let otp:Int
     
 }

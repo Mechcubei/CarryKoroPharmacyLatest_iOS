@@ -290,11 +290,10 @@
 		0B5E7F352498C41500F9B86A /* Order history */ = {
 			isa = PBXGroup;
 			children = (
-				10F3A49E23E05D2E009A8D46 /* OrderHomeVC.swift */,
-				10901E2523DB00A000044377 /* OrderDetailsVC.swift */,
 				109ECFF623F2DFB60051F2E8 /* OldOrdersViewController.swift */,
-				10D3BFD023ED2F4A0042C61D /* EditOrderViewController.swift */,
 				10ADB1CF23CF30AF004438BE /* OrderHistoryViewController.swift */,
+				AB54ED5A244DC92100B01585 /* inprogressView.swift */,
+				AB96122E2451F68C00A48734 /* ongoingVc.swift */,
 			);
 			path = "Order history";
 			sourceTree = "<group>";
@@ -322,11 +321,19 @@
 				10E3BE6523E18E780074B706 /* ForgotView.swift */,
 				105D2E1B23F6664C00E76ED5 /* CountryViewController.swift */,
 				101BA0F423D9ACE100E59ED7 /* DemoViewController.swift */,
-				AB54ED5A244DC92100B01585 /* inprogressView.swift */,
-				AB96122E2451F68C00A48734 /* ongoingVc.swift */,
 				AB96123024521CE900A48734 /* CancelViewControllerVC.swift */,
 			);
 			path = Miscellaneous;
+			sourceTree = "<group>";
+		};
+		0B9633C825C2D3D900519971 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				10F3A49E23E05D2E009A8D46 /* OrderHomeVC.swift */,
+				10901E2523DB00A000044377 /* OrderDetailsVC.swift */,
+				10D3BFD023ED2F4A0042C61D /* EditOrderViewController.swift */,
+			);
+			path = Orders;
 			sourceTree = "<group>";
 		};
 		0BA87E8624968DDD006B0204 /* Authentic */ = {
@@ -351,6 +358,7 @@
 				0BA87E8624968DDD006B0204 /* Authentic */,
 				0B5E7F372498C41D00F9B86A /* Home */,
 				0B5E7F362498C41800F9B86A /* Payment */,
+				0B9633C825C2D3D900519971 /* Orders */,
 				0B5E7F352498C41500F9B86A /* Order history */,
 				0B5E7F342498C41200F9B86A /* Setting */,
 				0B5E7F3A2498C4D000F9B86A /* Miscellaneous */,
@@ -1106,8 +1114,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pharmacy/Pharmacy.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 59A9A9GT3D;
 				INFOPLIST_FILE = Pharmacy/Info.plist;
@@ -1115,9 +1123,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pharmacy.carrykoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Pharmacy carryKoro Appstore";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1129,8 +1138,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pharmacy/Pharmacy.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 59A9A9GT3D;
 				INFOPLIST_FILE = Pharmacy/Info.plist;
@@ -1138,9 +1147,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.pharmacy.carrykoro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Pharmacy carryKoro Appstore";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

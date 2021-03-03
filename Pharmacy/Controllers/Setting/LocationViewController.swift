@@ -24,7 +24,7 @@ class LocationViewController: UIViewController , GMSMapViewDelegate,CLLocationMa
     var comingFrom = ""
     override func viewDidLoad() {
           //Handle Google Maps
-         comingFrom = "location"
+             comingFrom = "location"
               locationManager.delegate = self
               locationManager.requestWhenInUseAuthorization()
               locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation

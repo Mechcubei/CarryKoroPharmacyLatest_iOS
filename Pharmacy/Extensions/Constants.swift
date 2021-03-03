@@ -56,12 +56,12 @@ struct Constants{
     //    static let kBaseUrl = server.live
     
     //Base URL'S
-    static let kBaseUrl = "https://carrykoro.com/public/api/"
-    static let baseUrl = "https://carrykoro.com/public/api/"
-//    static let kBaseUrl = "http://134.209.157.211/Carrykoro/public/api/"
-//    static let baseUrl = "http://134.209.157.211/Carrykoro/public/api/"
+    static let kBaseUrl = "https://carrykoro.com/api/"
+    static let baseUrl = "https://carrykoro.com/api/"
+    //static let kBaseUrl = "http://134.209.157.211/Carrykoro/public/api/"
+    //static let baseUrl = "http://134.209.157.211/Carrykoro/public/api/"
     static let kSocketUrl = "http://134.209.157.211:3001"
-        
+    
     // API METHODS
     static let kLogin = "login"
     static let kRegister = "pharmacy-register"
@@ -107,6 +107,15 @@ struct Constants{
     static let KNotificationCount = "get-noti-count"
      static let KReadNotification = "notification-read"
      static let KgetNotification = "get_notification"
+    static let KSearchMedicines = "get_med_list"
+    static let orderdetail = "order-tracking"
+    static let expireotp = "expire-otp"
+    static let KverifyRegisterApi = "verified-otp-phar"
+    static let KCancelOrderDetail = "order-tracking"
+    static let KverifyRegisterApi2 = "verified_otp_phar_register"
+    static let otp_send_phar_register = "otp_send_phar_register"
+    static let otpverify_phar_phone = "otpverify_phar_phone"
+    static let otp_send_phar_phone = "otp_send_phar_phone"
 
 }
  

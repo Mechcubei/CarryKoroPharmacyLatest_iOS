@@ -8,9 +8,10 @@
 
 import UIKit
 import FlagPhoneNumber
+import CountryPickerView
 
 @available(iOS 13.0, *)
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController,CountryPickerViewDelegate, CountryPickerViewDataSource {
         
     @IBOutlet var hiddenView: UIView!
     @IBOutlet var AlertBox: DesignableView!
@@ -29,7 +30,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet var fifthView: UIView!
     @IBOutlet var lblCountryCode: UILabel!
     @IBOutlet var txtEmail: UITextField!
-    @IBOutlet var countryCodeView: UIView!
+    @IBOutlet var countryCodeView: CountryPickerView!
     @IBOutlet var imgValidInvalid: UIImageView!
     var registerVal = ""
     var comingFrom = ""
@@ -41,15 +42,63 @@ class RegisterViewController: UIViewController {
     let validityType: String.validityType = .email
     var Id  = Int()
     var OTP = ""
+    var cpv = CountryPickerView()
+    
+    @IBOutlet var timerLabel: UILabel!
+    @IBOutlet var btnResend: UIButton!
+    var isRepeat = true
+    var counter = 60
+    var timer = Timer()
     
     //MARK:- Life cycle methods
     override func viewDidLoad(){
         super.viewDidLoad()
         
         self.initialSetup()
+        self.countryPickerSetup()
     }
     
     //MARK:- Extra class functions
+    //MARK:- Otp resend methods
+    func checkOtpStatus(){
+        DispatchQueue.main.async {
+            self.timer =   Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector( self.updateTime), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func updateTime() {
+        if counter > 0 {
+            counter -= 1
+            self.timerLabel.text = "OTP Valid for: 0:\(counter)"
+            self.btnResend.isHidden = true
+        }else if counter == 0 {
+            
+            btnResend.isHidden = false
+            counter = 60
+            timer.invalidate()
+            //self.expireOTP()
+        }
+    }
+    func countryPickerView(_ countryPickerView: CountryPickerView, didSelectCountry country: Country) {
+             print(country.phoneCode)
+             countryCODE = country.phoneCode
+    }
+    
+    
+    //MARK:- Class extra functions
+    func countryPickerSetup(){
+        
+        
+        self.countryCodeView.delegate = self
+        DispatchQueue.main.async {
+            let country = self.cpv.selectedCountry.phoneCode
+            print(country)
+            self.countryCODE = country
+            self.countryCodeView.showCountryCodeInView = false
+            self.countryCodeView.textColor = .white
+            self.countryCodeView.font = UIFont(name: "Roboto-Bold", size: 14.0)!
+        }
+    }
     
     func initialSetup(){
         self.viewsHide()
@@ -95,7 +144,6 @@ class RegisterViewController: UIViewController {
            self.navigationController?.popViewController(animated: true)
     }
     
-    
     @IBAction func x(_ sender: UIButton) {
         let first  = firstTextField.text! + secondTextView.text!
         let second = thirdTextField.text! + forthTextField.text!
@@ -105,8 +153,7 @@ class RegisterViewController: UIViewController {
         
         // aman
         OTP == "" ?   alert("Alert", message: "Please Enter OTP")   : verifyOTPAPI()
-        
-        
+                
        // self.verifyOTPAPI()
     }
     
@@ -171,14 +218,15 @@ class RegisterViewController: UIViewController {
         }
         else if txtConfirmPassword.text == "" {
             Utilities.ShowAlertView2(title: "Alert", message: "Please enter your confirm password", viewController: self)
+        }
+        else if txtConfirmPassword.text != self.txtPassword.text {
+            Utilities.ShowAlertView2(title: "Alert", message: "Mismatch password", viewController: self)
         } else {
             
             self.registerAPI()
-            
         }
-        
     }
-        
+    
     func formatNumber(mobileNo: String) -> String{
         var str : NSString = mobileNo as NSString
         str = str.replacingOccurrences(of: "+91- ", with: "") as NSString
@@ -197,22 +245,30 @@ class RegisterViewController: UIViewController {
         var params = [String : String]()
         let first = self.txtEmail.text!.replaceCharacters(characters: "- ", toSeparator:"+")
         let code = countryCODE.replacingOccurrences(of: "+" , with: "", options: .literal, range: nil)
-        
         if comingFrom == "phone" {
-            params  = ["country_code":code,"phone":  first,"pharmacy_name":self.txtname.text!,"password":self.txtPassword.text!,"confirmpassword":self.txtConfirmPassword.text!]
+            params  = ["country_code":code,
+                       "phone":first,
+                       "pharmacy_name":self.txtname.text!,
+                       "password":self.txtPassword.text!,
+                       "confirmpassword":self.txtConfirmPassword.text!,
+                       "verification_type":"phone"
+
+            ]
         }else if comingFrom == "email"{
-            params = ["email": txtEmail.text!,"pharmacy_name":self.txtname.text!,"password":self.txtPassword.text!,"confirmpassword":self.txtConfirmPassword.text!]
+            params = ["email": txtEmail.text!,
+                      "pharmacy_name":self.txtname.text!,
+                      "password":self.txtPassword.text!,
+                      "confirmpassword":self.txtConfirmPassword.text!,
+                      "verification_type":"email"
+
+            ]
         }
         
+        print(params)
         regVM.getRegData(vc: self, prams: params) { (resp) in
-            
             print(resp)
-            
             DispatchQueue.main.async{
-                                
-                UserDefaults.standard.set(resp.token, forKey:Constants.kDeviceID)
-                UserDefaults.standard.set(resp.id, forKey: Constants.kUserID)
-                
+
                 if resp.message == "The confirmpassword and password must match."{
                     self.alert("Alert", message: resp.message)
                 }
@@ -223,37 +279,72 @@ class RegisterViewController: UIViewController {
                     self.alert("Alert", message: resp.message)
                     
                 } else{
-                    self.Id = resp.id
+                    //self.Id = resp.id
                     self.AlertBox.isHidden = false
                     self.hiddenView.isHidden = false
+                    self.clearData()
+                   
                     self.view.endEditing(true)
                     self.doAnimationAction()
+                    self.checkOtpStatus()
+
                 }
                 self.hideProgress()
             }
         }
     }
+    
+    func clearData(){
+        firstTextField.text = ""
+        secondTextView.text = ""
+        thirdTextField.text = ""
+        forthTextField.text = ""
+        fifthTextField.text = ""
+    }
         
     func verifyOTPAPI(){
+
+        let first = self.txtEmail.text!.replaceCharacters(characters: "- ", toSeparator:"+")
+        let code = countryCODE.replacingOccurrences(of: "+" , with: "", options: .literal, range: nil)
         
-        var params = [String:Any]()
-        params = [
-            "verification_type": comingFrom,
-            "otp":OTP
-        ]
+        var params = [String : String]()
+        if comingFrom == "phone" {
+            params  = [
+                        "country_code":code,
+                       "phone":first,
+                       "pharmacy_name":self.txtname.text!,
+                       "password":self.txtPassword.text!,
+                       "confirmpassword":self.txtConfirmPassword.text!,
+                       "otp":OTP,
+                       "verification_type":"phone"
+                      ]
+        }else if comingFrom == "email"{
+            params = ["email": txtEmail.text!,
+                      "pharmacy_name":self.txtname.text!,
+                      "password":self.txtPassword.text!,
+                      "confirmpassword":self.txtConfirmPassword.text!,
+                     "otp":OTP,
+                     "verification_type":"email"
+            ]
+        }
         
-        NetworkingService.shared.getData_HeaderParameter(PostName: Constants.kVerifyOtp, parameters: params ){ (resp) in
+        NetworkingService.shared.getData(PostName: Constants.KverifyRegisterApi2, parameters: params ){ (resp) in
             print(resp)
             
             let dic = resp as! NSDictionary
             print(dic)
             
-            if (dic.value(forKey: "has_data") as? String == "0")
-            {
-                self.hiddenView.isHidden = true
-                self.AlertBox.isHidden = true
+            guard dic["statusCode"] as! Int == 200 else {
+//                self.hiddenView.isHidden = true
+//                self.AlertBox.isHidden = true
                 Utilities.ShowAlertView2(title: "Alert",message: dic.value(forKey: "message") as! String, viewController: self)
-            }else{
+                return
+            }
+            
+                let data =  dic["data"] as! [String:Any]
+                let token =  data["token"] as! String
+                UserDefaults.standard.set(token, forKey:Constants.kDeviceID)
+               // UserDefaults.standard.set(resp.id, forKey: Constants.kUserID)
                 self.hiddenView.isHidden = true
                 self.AlertBox.isHidden = true
                 self.doAnimationAction()
@@ -265,9 +356,41 @@ class RegisterViewController: UIViewController {
                         navigator.pushViewController(viewController, animated: true)
                     }
                 }
-            }
+           // }
             self.hideProgress()
         }
+    }
+    func setParams() -> [String:String]{
+        let code = countryCODE.replacingOccurrences(of: "+" , with: "", options: .literal, range: nil)
+
+        let phoneparams : [String:String] = ["phone_number": txtEmail.text!, "country_code":code, "user_role":"pharmacy","verification_type":"phone"]
+        let emailparams :[String:String] = ["email":txtEmail.text!, "verification_type":"email", "user_role":"pharmacy"]
+        return  comingFrom == "email"  ? emailparams  : phoneparams
+     }
+    
+    func expireOTP(){
+        let params = setParams()
+        print(params)
+        NetworkingService.shared.getData(PostName:Constants.expireotp, parameters: params) { (response) in
+            print(response)
+            let dic = response as! NSDictionary
+            print(dic)
+            
+            let hasdata = dic["has_data"] as? Int ?? 0
+            print(hasdata)
+            
+            if hasdata == 0
+            {
+                print("Something")
+                
+                Utilities.ShowAlertView2(title: "Alert",message: dic.value(forKey: "message") as! String, viewController: self)
+            }
+        }
+    }
+    
+    @IBAction func btnResend(_ sender: Any) {
+       // checkOtpStatus()
+        registerAPI()
     }
     func handleCornerRadius(){
         firstView.layer.cornerRadius = firstView.frame.size.width/2

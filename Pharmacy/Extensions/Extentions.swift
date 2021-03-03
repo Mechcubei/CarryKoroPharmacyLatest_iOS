@@ -45,7 +45,7 @@ func dropShadow(scale: Bool = true) {
 extension UIViewController{
     
     func setUpBackButtonNav() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrow"), style: .plain, target: self, action: #selector(leftBarTap))
+//        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "left"), style: .plain, target: self, action: #selector(leftBarTap))
         self.navigationController?.isNavigationBarHidden = false
     }
     

@@ -24,6 +24,8 @@ pod 'Firebase/Messaging'
  pod 'Firebase/Firestore'
  pod 'Firebase/Database'
  pod 'Firebase/Storage'
+ pod 'ADCountryPicker', '~> 2.1.0'
+
 
 
 target 'PharmacyTests' do

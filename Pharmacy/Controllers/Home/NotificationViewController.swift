@@ -20,6 +20,8 @@ class NotificationViewController: UIViewController {
     var dateArray  = [String]()
     var descriptionArray  = [String]()
     var orderArray  = [String]()
+    var requestIdArr =  [Int]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +45,6 @@ class NotificationViewController: UIViewController {
     }
     //MARK:- Api
     func readNotification(){
-        
         let parms:[String:Any] = ["":""]
                NetworkingService.shared.getData_HeaderParameter(PostName: Constants.KReadNotification, parameters: parms) { (response) in
                       print(response)
@@ -52,7 +53,10 @@ class NotificationViewController: UIViewController {
     
     func getNotification(){
               let parms:[String:Any] = ["":""]
+        
+        self.showProgress()
                   NetworkingService.shared.getData_HeaderParameter(PostName: Constants.KgetNotification, parameters: parms) { (response) in
+                    self.hideProgress()
                          print(response)
                    
                    let resp = response as! NSDictionary
@@ -67,6 +71,8 @@ class NotificationViewController: UIViewController {
                        self.orderArray.append(value[data]["order_number"] as! String)
                        self.descriptionArray.append(value[data]["noti_body"] as! String)
                        self.dateArray.append(value[data]["updated_at"] as! String)
+                      self.requestIdArr.append(value[data]["request_id"] as! Int)
+
                    }
                    self.notificationTableView.reloadData()
                }
@@ -92,8 +98,18 @@ extension NotificationViewController : UITableViewDelegate , UITableViewDataSour
         cell.lblOrderNumber.text  = self.orderArray[indexPath.row]
         cell.lblDescription.text  = self.descriptionArray[indexPath.row]
         cell.lblDate.text  = self.dateArray[indexPath.row]
-        
         return  cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderDetailsVC") as? OrderDetailsVC {
+            viewController.requestId = requestIdArr[indexPath.row] 
+             viewController.ordernumber = self.orderArray[indexPath.row]
+            //viewController.username = userNameArr[indexPath.row] as! String
+            if let navigator = self.navigationController{
+                navigator.pushViewController(viewController, animated: true)
+            }
+        }
     }
 }
 

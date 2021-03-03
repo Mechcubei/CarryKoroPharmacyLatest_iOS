@@ -179,37 +179,36 @@ class OtpViewController: UIViewController {
  
     @IBAction func submitOTP(_ sender: Any) {
         verifyOTPAPI()
-        
     }
+    
     func verifyOTPAPI(){
+        
         let first  = firstTextField.text! + secondTextView.text!
         let second = thirdTextField.text! + forthTextField.text!
         let third =   fifthTextField.text!
-        
+                
         let OTP = first + second + third
-        
         let params : [String:Any] =
         [
             "verification_type": comingFrom,
             "otp":OTP
         ]
-        
         NetworkingService.shared.getData_HeaderParameter(PostName: Constants.kVerifyOtp, parameters: params as! [String : Any]){ (resp) in
             print(resp)
             let dic = resp as! NSDictionary
             print(dic)
-            if (dic.value(forKey: "has_data") as? String == "0")
-            {
+            if (dic.value(forKey: "has_data") as? String == "0") {
+                
                 Utilities.ShowAlertView2(title: "Alert",message: dic.value(forKey: "message") as! String, viewController: self)
+                
             }else{
-            
                 if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController {
                     if let navigator = self.navigationController{
                         navigator.pushViewController(viewController, animated: true)
                     }
                 }
             }
-            self.hideProgress()
+         self.hideProgress()
         }
     }
     

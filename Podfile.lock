@@ -212,6 +212,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - ADCountryPicker (2.1.0)
   - Alamofire (4.9.1)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
@@ -390,6 +391,7 @@ PODS:
   - Starscream (3.1.1)
 
 DEPENDENCIES:
+  - ADCountryPicker (~> 2.1.0)
   - Alamofire
   - CountryPickerView
   - EmailValidator
@@ -412,6 +414,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - ADCountryPicker
     - Alamofire
     - BoringSSL-GRPC
     - CountryPickerView
@@ -454,6 +457,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  ADCountryPicker: 502cee76a30ea1c3834eb0df170ce635691655c9
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   CountryPickerView: a28b48d2fc89827bff18c4bd72ab8a7ae5c30953
@@ -494,6 +498,6 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: f5d1c7800c6b341d5997c021c446aa8f615159e7
+PODFILE CHECKSUM: d3aa876d6a6bbb201d287ec0c14461c1d9438301
 
 COCOAPODS: 1.9.3

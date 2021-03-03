@@ -4,10 +4,13 @@
 //
 //  Created by osx on 03/01/20.
 //  Copyright © 2020 osx. All rights reserved.
-//
+
 
 import UIKit
 import FlagPhoneNumber
+import ADCountryPicker
+import CountryPickerView
+
 @available(iOS 13.0, *)
 class LoginViewController: UIViewController {
     
@@ -55,7 +58,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet var lblCountryCode: UILabel!
     
-    @IBOutlet var countryCodeView: UIView!
+    @IBOutlet var countryCodeView: CountryPickerView!
     @IBOutlet var imgValidInvalid: UIImageView!
       
 
@@ -69,15 +72,33 @@ class LoginViewController: UIViewController {
     var forgotID = ""
     var timer = Timer()
     
+  // country code setup
+    var cpv = CountryPickerView()
+    //var countryCODE = ""
+
+    
     //MARK:- Life cycle methods
     
     override func viewDidLoad(){
         super.viewDidLoad()
                 
         self.navigationController?.isNavigationBarHidden = false
-        lblCountryCode.text = "+91"
-        countryCODE = "+91"
+        // lblCountryCode.text = "+91"
+        // countryCODE = "+91"
         self.intitalSetup()
+        countryPickerSetup()
+    }
+    
+    //MARK:- Class extra functions
+    func countryPickerSetup(){
+        DispatchQueue.main.async {
+            let country = self.cpv.selectedCountry.phoneCode
+            print(country)
+            self.countryCODE = country
+            self.countryCodeView.showCountryCodeInView = false
+            self.countryCodeView.textColor = .white
+            self.countryCodeView.font = UIFont(name: "Roboto-Bold", size: 14.0)!
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,6 +168,7 @@ class LoginViewController: UIViewController {
     @IBAction func btnForgotPassword(_ sender: UIButton){
         hiddenView.isHidden = false
         forgotView.isHidden = false
+        self.txtEnterEmailOrNumber2.text! = ""
         doAnimationAction()
     }
     
@@ -182,11 +204,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func btnSignUp(_ sender: UIButton) {
-        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstViewController") as? FirstViewController {
-            if let navigator = self.navigationController {
-                navigator.popViewController(animated: true)
-            }
-        }
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RegisterViewController") as? RegisterViewController
+        self.navigationController!.pushViewController(viewController!, animated: true)
+//        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FirstViewController") as? FirstViewController {
+//            if let navigator = self.navigationController {
+//                navigator.popViewController(animated: true)
+//            }
+//        }
     }
     
     
@@ -258,6 +282,7 @@ class LoginViewController: UIViewController {
             ]
         }
         
+        print(params)
         loginVM.getLoginData(vc: self, prams: params) { (resp) in
             print(resp.first_name)
             print(resp.last_name)
@@ -308,48 +333,56 @@ class LoginViewController: UIViewController {
         
         if comingFrom == "phone"
         {
-            params  = ["verification_type": comingFrom,
-                       "phone": first , "country_code" : code ]
+            params  = [
+                        "verification_type": comingFrom,
+                        "phone": first ,
+                        "country_code" : code
+                      ]
+            
         } else if comingFrom == "email"{
             
-            params  = ["verification_type": comingFrom,
-                       "email":self.txtEnterEmailOrNumber2.text!]
-            
+            params  = [
+                        "verification_type": comingFrom,
+                        "email":self.txtEnterEmailOrNumber2.text!
+                      ]
         }
         
+        print(params)
         showProgress()
         NetworkingService.shared.getData(PostName: Constants.kForgotPassword, parameters: params ){ (resp) in
+            
             print(resp)
-            
             self.hideProgress()
-            
             let dic = resp as! NSDictionary
             print(dic)
             if (dic.value(forKey: "has_data") as? Int == 0)
             {
-                
                 Utilities.ShowAlertView2(title: "Alert",message: dic.value(forKey: "message") as! String, viewController: self)
             }
             else{
                 if dic.value(forKey: "message") as! String == "Email is Not Register" {
-                    
-                    
                     Utilities.ShowAlertView2(title: "Alert",message:"Email is Not Registered", viewController: self)
-                    
-                    
                 }else {
                     
                    // self.lblSubmit.text = (dic.value(forKeyPath: "data.otp") as! String)
                     
                     self.Id = dic.value(forKeyPath: "data.id") as! Int
-                    self.hiddenView.isHidden = true
                     self.forgotView.isHidden = true
+                    self.hiddenView.isHidden = false
                     self.OTPView.isHidden = false
                     Utilities.ShowAlertView2(title: "Alert",message:"Code Sent Successfully", viewController: self)
                 }
             }
             self.hideProgress()
         }
+    }
+    
+    func clearData(){
+        firstTextField.text! = ""
+        secondTextView.text!  = ""
+        thirdTextField.text!  = ""
+        forthTextField.text!  = ""
+        fifthTextField.text!  = ""
     }
     
     func verifyOTPAPI(){
@@ -359,29 +392,35 @@ class LoginViewController: UIViewController {
         let OTP = first + second + third
         
         let params : [String:Any] = ["verification_type": comingFrom,
-                                     "otp":OTP,"id":Id]
+                                     "otp":OTP,
+                                     "id":Id]
         
-            showProgress()
+        showProgress()
+        
+        print(params)
         
         NetworkingService.shared.getData(PostName: Constants.kforgotVerifyOTP, parameters: params ){ (resp) in
             print(resp)
             self.hideProgress()
             let dic = resp as! NSDictionary
             print(dic)
-            if (dic.value(forKey: "has_data") as? String == "0")
-            {
-                self.hiddenView.isHidden = true
-                self.OTPView.isHidden = true
+                        
+            guard dic["statusCode"] as! Int == 200 else {
+               // self.hiddenView.isHidden = true
+              //  self.OTPView.isHidden = true
                 Utilities.ShowAlertView2(title: "Alert",message: dic.value(forKey: "message") as! String, viewController: self)
+                
+                return
             }
-            else{
+
                 self.forgotID = dic.value(forKeyPath: "data.id") as! String
-                self.hiddenView.isHidden = true
+                self.clearData()
+                self.hiddenView.isHidden = false
                 self.OTPView.isHidden = true
                 self.passwordView.isHidden = false
                 self.doAnimationAction()
-            }
-            self.hideProgress()
+         
+                self.hideProgress()
         }
     }
     
@@ -426,19 +465,22 @@ class LoginViewController: UIViewController {
     //MARK:-Texfield methods
 
     
+    
       func textField(_ textfield: UITextField, shouldChangeCharactersIn  range: NSRange, replacementString string: String) -> Bool {
           if textfield.text!.count == 0 {
-              countryCodeView.isHidden = true
-              imgValidInvalid.isHidden = true
-              self.comingFrom = "phone"
-              if textfield == self.txtEmail{
+             // countryCodeView.isHidden = true
+             // imgValidInvalid.isHidden = true
+             // self.comingFrom = "phone"
+            if textfield == self.txtEmail  ||   textfield == txtEnterEmailOrNumber2 {
                   if string.isNumericValue == true{
                       print("numbric...........................")
                       self.checkTxtAct = "number"
+                      self.comingFrom = "phone"
+
                       let length = (txtEmail.text?.count)! - range.length + string.count
                       print("lenght",length)
                       if length == 1{
-                          let num : String = self.formatNumber(mobileNo: txtEmail.text!)
+                        let num : String = self.formatNumber(mobileNo: textfield == self.txtEmail ? txtEnterEmailOrNumber2.text! : txtEmail.text!)
                           countryCodeView.isHidden = false
                           imgValidInvalid.isHidden = true
                       }
@@ -478,13 +520,8 @@ class LoginViewController: UIViewController {
                           countryCodeView.isHidden = true
                           imgValidInvalid.isHidden = true
                       }
-                      
-                      
-                      
-                      
                   }
-                  
-              }
+                }
           }
           else {
               if textfield == self.txtEmail{
@@ -572,28 +609,15 @@ class LoginViewController: UIViewController {
                 break
             }
         }
-        if  text?.count == 0{
+        
+        // when user   try to enter 2 digits in same texfield
+        if  text?.count == 2 {
             switch textField{
-            case firstTextField:
-                self.firstTextField.tintColor = .clear
-                firstView.backgroundColor = .white
-                firstTextField.becomeFirstResponder()
-            case secondTextView:
-                self.secondTextView.tintColor = .clear
-                secondView.backgroundColor = .white
-                firstTextField.becomeFirstResponder()
-            case thirdTextField:
-                self.thirdTextField.tintColor = .clear
-                secondTextView.becomeFirstResponder()
-                thirdView.backgroundColor = .white
-            case forthTextField:
-                self.forthTextField.tintColor = .clear
-                forthView.backgroundColor = .white
-                thirdTextField.becomeFirstResponder()
-            case fifthTextField:
-                self.fifthTextField.tintColor = .clear
-                fifthView.backgroundColor = .white
-                forthTextField.becomeFirstResponder()
+            case firstTextField: self.modifyOtpValue(texfield:firstTextField,text:text!)
+            case secondTextView: self.modifyOtpValue(texfield:secondTextView,text:text!)
+            case thirdTextField: self.modifyOtpValue(texfield:thirdTextField,text:text!)
+            case forthTextField: self.modifyOtpValue(texfield:forthTextField,text:text!)
+            case fifthTextField: self.modifyOtpValue(texfield:fifthTextField,text:text!)
             default:
                 break
             }
@@ -601,6 +625,12 @@ class LoginViewController: UIViewController {
         else{
             
         }
+    }
+        
+    func modifyOtpValue(texfield:UITextField,text:String){
+        let value = text.dropFirst()
+        texfield.text =  String(value)
+        texfield.resignFirstResponder()
     }
 }
 

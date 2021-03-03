@@ -41,33 +41,36 @@ class RegisterViewModel: UIViewController {
     func getRegData(vc:UIViewController,prams:[String:String],success:@escaping (_ response: RegisterModel) -> Void){
         Service.shareInstance.webservicesPostRequest2(baseString: Constants.kBaseUrl + Constants.kRegister, parameters: prams , success: { (res) in
             self.hideProgress()
-
             print(res)
-           
             if let status =  res.value(forKey: "has_data") as? Int{
                 if status == 0{
                 // stop loader
+                                        
+                    guard  res.value(forKey: "message") as? String != "Allready Registerd with us Please login to Continue"  else {
+                        
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
+                            Utilities.show(alert: "Alert", message: "Already registered with us!", buttonText: "Ok", buttonOk:{()in
+                            self.dismiss(animated: true, completion: nil)})
+                        }
+                        return
+                    }
+                    
+                    
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.0) {
                 Utilities.show(alert: "Alert", message: res.value(forKey: "message") as! String, buttonText: "Ok", buttonOk:{()in
                 self.dismiss(animated: true, completion: nil)})
-                    
                 }
-            }else {
-                    
+        }else {
+
                 if let dic = res.value(forKey: "data") as? NSDictionary{
-                    
-                        success(RegisterModel(id: (dic.value(forKey: "id") as! Int), otp: "\(dic.value(forKey: "otp") ?? "")", status: "\(dic.value(forKey: "status") ?? "")", token: "\(dic.value(forKey: "token") ?? "")", message: ""))
+                        success(RegisterModel(id: 2, otp: "\(dic.value(forKey: "otp") ?? "")", status: "\(dic.value(forKey: "statusCode") ?? "")", token: "", message: ""))
                     }
                 }
             }
-            
         }) { (err) in
-            
             print(err)
             self.hideProgress()
             //SingletonClass.shared.stopLoading()
-            
         }
     }
-   
 }

@@ -32,6 +32,19 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
     @IBOutlet var btnTrade: DesignableButton!
     @IBOutlet var btnCertificate: DesignableButton!
     @IBOutlet var countryPicker: CountryPickerView!
+    
+    @IBOutlet var firstTextField: UITextField!
+    @IBOutlet var secondTextView: UITextField!
+    @IBOutlet var thirdTextField: UITextField!
+    @IBOutlet var forthTextField: UITextField!
+    @IBOutlet var fifthTextField: UITextField!
+    
+    @IBOutlet var firstView: UIView!
+    @IBOutlet var secondView: UIView!
+    @IBOutlet var thirdView: UIView!
+    @IBOutlet var forthView: UIView!
+    @IBOutlet var fifthView: UIView!
+    
     let formatter = NBAsYouTypeFormatter(regionCode: "IN")
     let phoneUtil = NBPhoneNumberUtil()
     var imgBanner =  UIImage()
@@ -50,6 +63,9 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
     var countryCode = ""
     var cpv = CountryPickerView()
     var type:String?
+    var phoneStatus:String!
+    var OTP = ""
+    
     
     //MARK:- Life cycle methods
     override func viewDidLoad() {
@@ -78,8 +94,8 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
         self.txtEmail.delegate = self
         
         self.txtname.isUserInteractionEnabled = false
-        
-        GetProfile()
+        self.GetProfile()
+        self.handlerSelectors()
         // Do any additional setup after loading the view.
     }
     
@@ -138,6 +154,76 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
         regionCode = cpv.selectedCountry.code
     }
     
+    func handlerSelectors(){
+        // Do any additional setup after loading the view, typically from a nib.
+        firstTextField.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        secondTextView.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        thirdTextField.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        forthTextField.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        fifthTextField.addTarget(self, action: #selector(self.textFieldDidChange(textField:)), for: UIControl.Event.editingChanged)
+        
+    }
+    @objc func textFieldDidChange(textField: UITextField){
+        let text = textField.text
+        if  text?.count == 1 {
+            switch textField{
+            case firstTextField:
+                self.firstTextField.tintColor = .clear
+                firstTextField.textAlignment = .center
+                secondTextView.becomeFirstResponder()
+            case secondTextView:
+                self.secondTextView.tintColor = .clear
+                secondTextView.textAlignment = .center
+                thirdTextField.becomeFirstResponder()
+            case thirdTextField:
+                self.thirdTextField.tintColor = .clear
+                thirdTextField.textAlignment = .center
+                forthTextField.becomeFirstResponder()
+            case forthTextField:
+                self.forthTextField.tintColor = .clear
+                forthTextField.textAlignment = .center
+                fifthTextField.becomeFirstResponder()
+            case fifthTextField:
+                self.fifthTextField.tintColor = .clear
+                fifthTextField.textAlignment = .center
+                fifthTextField.resignFirstResponder()
+            default:
+                break
+            }
+        }
+        if  text?.count == 0 {
+            switch textField{
+            case firstTextField:
+                self.firstTextField.tintColor = .clear
+                firstView.backgroundColor = .white
+                firstTextField.becomeFirstResponder()
+            case secondTextView:
+                self.secondTextView.tintColor = .clear
+                secondView.backgroundColor = .white
+                firstTextField.becomeFirstResponder()
+            case thirdTextField:
+                self.thirdTextField.tintColor = .clear
+                secondTextView.becomeFirstResponder()
+                thirdView.backgroundColor = .white
+            case forthTextField:
+                self.forthTextField.tintColor = .clear
+                forthView.backgroundColor = .white
+                thirdTextField.becomeFirstResponder()
+            case fifthTextField:
+                self.fifthTextField.tintColor = .clear
+                fifthView.backgroundColor = .white
+                forthTextField.becomeFirstResponder()
+                
+            default:
+                break
+            }
+        }
+        else{
+            
+        }
+    }
+    
+    
     func requestCameraPermission() {
         AVCaptureDevice.requestAccess(for: .video, completionHandler: {accessGranted in
             guard accessGranted == true else { return }
@@ -145,43 +231,71 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
         })
     }
     
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        if textField.text == txtNumber.text {
-            if txtNumber.text != "" {
-                imgValidInvalid.isHidden = true
-                var updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-                print(updatedString)
-                if updatedString?.count ?? 1 > 4 {
-                    imgPhone.isHidden = false
-                    let phoneNumber: NBPhoneNumber = try! phoneUtil.parse(updatedString, defaultRegion: regionCode)
-                    print(phoneUtil.isValidNumber(forRegion: phoneNumber, regionCode: regionCode))
-                    if (phoneUtil.isValidNumber(forRegion: phoneNumber, regionCode: regionCode)) == true {
-                        imgPhone.image =  #imageLiteral(resourceName: "verified")
-                    }else{
-                        imgPhone.image = #imageLiteral(resourceName: "cancel")
-                    }
-                }else {
-                    imgPhone.isHidden = true
-                }
+        imgValidInvalid.isHidden = false
+        print(txtNumber.text!.count)
+        if txtNumber.text!.count > 9 {
+            imgPhone.image = #imageLiteral(resourceName: "cancel")
+            return true
+            
+        }else if  txtNumber.text!.count == 9{
+            imgPhone.image = #imageLiteral(resourceName: "verified")
+            return true
+        }else {
+            if  txtNumber.text!.count == 10{
+                imgPhone.image = #imageLiteral(resourceName: "verified")
             }
-        }
-        else {
-            let length = (txtEmail.text?.count)! - range.length + string.count
-            if length > 0 {
-                self.imgValidInvalid.isHidden = false
-                if isValidEmail(self.txtEmail.text ?? "") {
-                    imgValidInvalid.image = #imageLiteral(resourceName: "verified")
-                }else {
-                    imgValidInvalid.image = #imageLiteral(resourceName: "cancel")
-                }
-            }else {
-                self.imgValidInvalid.isHidden = true
+            if  txtNumber.text!.count == 11{
+                imgPhone.image = #imageLiteral(resourceName: "verified")
             }
+            if  txtNumber.text!.count == 12{
+                imgPhone.image = #imageLiteral(resourceName: "verified")
+            }
+            if  txtNumber.text!.count == 13{
+                imgPhone.image = #imageLiteral(resourceName: "verified")
+            }
+            imgPhone.image = #imageLiteral(resourceName: "cancel")
+            
+            return true
         }
-        return true
     }
+    //
+    //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    //
+    //        if textField.text == txtNumber.text {
+    //            if txtNumber.text != "" {
+    //                imgValidInvalid.isHidden = true
+    //                var updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
+    //                print(updatedString)
+    //                if updatedString?.count ?? 1 > 4 {
+    //                    imgPhone.isHidden = false
+    //                    let phoneNumber: NBPhoneNumber = try! phoneUtil.parse(updatedString, defaultRegion: regionCode)
+    //                    print(phoneUtil.isValidNumber(forRegion: phoneNumber, regionCode: regionCode))
+    //                    if (phoneUtil.isValidNumber(forRegion: phoneNumber, regionCode: regionCode)) == true {
+    //                        imgPhone.image =  #imageLiteral(resourceName: "verified")
+    //                    }else{
+    //                        imgPhone.image = #imageLiteral(resourceName: "cancel")
+    //                    }
+    //                }else {
+    //                    imgPhone.isHidden = true
+    //                }
+    //            }
+    //        }
+    //        else {
+    //            let length = (txtEmail.text?.count)! - range.length + string.count
+    //            if length > 0 {
+    //                self.imgValidInvalid.isHidden = false
+    //                if isValidEmail(self.txtEmail.text ?? "") {
+    //                    imgValidInvalid.image = #imageLiteral(resourceName: "verified")
+    //                }else {
+    //                    imgValidInvalid.image = #imageLiteral(resourceName: "cancel")
+    //                }
+    //            }else {
+    //                self.imgValidInvalid.isHidden = true
+    //            }
+    //        }
+    //        return true
+    //    }
     
     func validations(){
         if self.txtname.text == "" && self.txtEmail.text == "" && self.txtLocation.text == "" && self.txtNumber.text == ""  && self.txtRegNo.text == "" && self.txtDescription.text == "" {
@@ -190,9 +304,9 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
         else if txtname.text == "" {
             Utilities.ShowAlertView2(title: "Alert", message: "Please enter your pharmacy name", viewController: self)
         }
-        else if self.txtEmail.text == "" {
-            Utilities.ShowAlertView2(title: "Alert", message: "Please enter email", viewController: self)
-        }
+        //        else if self.txtEmail.text == "" {
+        //            Utilities.ShowAlertView2(title: "Alert", message: "Please enter email", viewController: self)
+        //        }
         else if txtLocation.text == "" {
             Utilities.ShowAlertView2(title: "Alert", message: "Please enter Location", viewController: self)
         }
@@ -200,7 +314,7 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
             Utilities.ShowAlertView2(title: "Alert", message: "Please enter your Phone Number", viewController: self)
         }
         else if txtRegNo.text == "" {
-            Utilities.ShowAlertView2(title: "Alert", message: "Please enter description", viewController: self)
+            Utilities.ShowAlertView2(title: "Alert", message: "Please enter reg No.", viewController: self)
         }else if imgLogo.cgImage == nil {
             Utilities.ShowAlertView2(title: "Alert", message: "Please upload Logo", viewController: self)
         }
@@ -213,7 +327,7 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
         } else if imgTrade.cgImage == nil {
             Utilities.ShowAlertView2(title: "Alert", message: "Please upload Trade Licence", viewController: self)
         } else {
-            self.AddDetails()
+            phoneStatus == "0" ?  self.sendPhoneOTPAPI() :    self.AddDetails()
         }
     }
     
@@ -300,7 +414,7 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
         if comingFrom == "logo"{
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
                 imgLogo = (info[UIImagePickerController.InfoKey.editedImage] as! UIImage)
-                btnLogo.backgroundColor = .green
+                btnLogo.backgroundColor = .systemGreen
                 btnLogo.setTitle("File Added", for: .normal)
                 
             }else{
@@ -310,7 +424,7 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
         else if comingFrom == "banner"{
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
                 imgBanner = (info[UIImagePickerController.InfoKey.editedImage] as! UIImage)
-                btnBanner.backgroundColor = .green
+                btnBanner.backgroundColor = .systemGreen
                 btnBanner.setTitle("File Added", for: .normal)
                 
             }else{
@@ -320,7 +434,7 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
         else if comingFrom == "certificate"{
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
                 imgCertificate = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
-                btnCertificate.backgroundColor = .green
+                btnCertificate.backgroundColor = .systemGreen
                 btnCertificate.setTitle("File Added", for: .normal)
             }else{
                 print("Something went wrong")
@@ -331,7 +445,7 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
             
             if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
                 imgTrade = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
-                btnTrade.backgroundColor = .green
+                btnTrade.backgroundColor = .systemGreen
                 btnTrade.setTitle("File Added", for: .normal)
             }else{
                 print("Something went wrong")
@@ -351,11 +465,98 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
             UserDefaults.standard.set(resp.userId, forKey:Constants.kUserID)
             self.txtname.text = resp.first_name + resp.last_name
             self.txtEmail.text = resp.email
+            self.phoneStatus = resp.phoneStatus
+            
+            self.imgPhone.isHidden = self.phoneStatus == "1" ? false : true
+            self.imgPhone.image = self.phoneStatus == "1" ? #imageLiteral(resourceName: "completed")  :  #imageLiteral(resourceName: "cancel")
+//            self..isHidden = self.phoneStatus == "1" ? false : true
+//            self.imgPhone.image = self.phoneStatus == "1" ? #imageLiteral(resourceName: "completed")  :  #imageLiteral(resourceName: "cancel")
+//            
             if resp.Phone != 0 {
                 self.txtNumber.text = "\(resp.Phone)"
             }
         }
+    }
+    
+    @IBAction func x(_ sender: UIButton) {
+        let first  = firstTextField.text! + secondTextView.text!
+        let second = thirdTextField.text! + forthTextField.text!
+        let third =   fifthTextField.text!
+        OTP = first + second + third
+        // aman
+        OTP == "" ? alert("Alert", message: "Please Enter OTP") : verifyOTPAPI()
+        // self.verifyOTPAPI()
+    }
+    
+    func sendPhoneOTPAPI(){
+        let code = countryCODE.replacingOccurrences(of: "+" , with: "", options: .literal, range: nil)
+        var params = [String : String]()
+        params  = [
+            "country_code":code,
+            "phone":txtNumber.text!,
+        ]
+        print(params)
+        NetworkingService.shared.getData(PostName: Constants.otp_send_phar_phone, parameters: params ){ (resp) in
+            print(resp)
+            let dic = resp as! NSDictionary
+            print(dic)
+            guard dic["statusCode"] as! Int == 200 else {
+                Utilities.ShowAlertView2(title: "Alert",message: dic.value(forKey: "message") as! String, viewController: self)
+                return
+            }
+            
+            self.hiddenView.isHidden = false
+            self.AlertBox.isHidden = false
+            self.doAnimationAction()
+            self.hideProgress()
+        }
+    }
+    
+    func verifyOTPAPI(){
+        let code = countryCODE.replacingOccurrences(of: "+" , with: "", options: .literal, range: nil)
+        var params = [String : String]()
+        params  = [
+            "country_code":code,
+            "phone":txtNumber.text!,
+            "otp":OTP,
+            "email":txtEmail.text!
+          ]
         
+        NetworkingService.shared.getData(PostName: Constants.otpverify_phar_phone, parameters: params){ (resp) in
+            print(resp)
+            
+            let dic = resp as! NSDictionary
+            print(dic)
+            guard dic["statusCode"] as! Int == 200 else {
+                Utilities.ShowAlertView2(title: "Alert",message: dic.value(forKey: "message") as! String, viewController: self)
+                return
+            }
+            
+            let data =  dic["data"] as! [String:Any]
+            let token =  data["token"] as! String
+            
+            UserDefaults.standard.set(token, forKey:Constants.kDeviceID)
+            self.hiddenView.isHidden = true
+            self.AlertBox.isHidden = true
+            
+            self.AddDetails()
+            
+            //            self.AlertBox.isHidden = true
+            // UserDefaults.standard.set(resp.id, forKey: Constants.kUserID)
+            //            self.hiddenView.isHidden = true
+            //            self.AlertBox.isHidden = true
+            //           self.doAnimationAction()
+            //            if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PharmacyRegisterVC") as? PharmacyRegisterVC {
+            //
+            //                viewController.type  = self.comingFrom
+            //
+            //                if let navigator = self.navigationController{
+            //                    navigator.pushViewController(viewController, animated: true)
+            //                }
+            //            }
+            //       // }
+            self.hideProgress()
+        }
     }
     
     func AddDetails(){
@@ -368,7 +569,8 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
                                         "location":self.txtLocation.text!,
                                         "longitude":Lat,
                                         "latitude":Long,
-                                        "description":txtDescription.text!]
+                                        "description":txtDescription.text!
+        ]
         uploadMultiplePartImage(urlString: Constants.kBaseUrl + Constants.addPharmacyDetail, params: parameter
                                 ,
                                 imageKeyValue1: "logo",
@@ -382,21 +584,17 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
                                 
                                 success: { (response) in
                                     print(response)
-                                    
                                     self.hideProgress()
                                     let dic = response
-                                    print(dic)
-                                    if (dic.value(forKey: "has_data") as? String == "0")
-                                    {
+                                    
+                                    guard dic["statusCode"] as! Int == 200 else {
                                         Utilities.ShowAlertView2(title: "Alert",message: dic.value(forKey: "message") as! String, viewController: self)
+                                        return
                                     }
-                                    else{
-                                        if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController {
-                                            if let navigator = self.navigationController {
-                                                //                            viewController.comingFrom = self.comingFrom
-                                                //                            viewController.otp  = otp
-                                                navigator.pushViewController(viewController, animated: true)
-                                            }
+                                    
+                                    if let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarViewController") as? TabBarViewController {
+                                        if let navigator = self.navigationController {
+                                            navigator.pushViewController(viewController, animated: true)
                                         }
                                     }
                                 }) { (Error) in
@@ -404,6 +602,14 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
         }
     }
     
+    func doAnimationAction() {
+        UIView .transition(with: self.AlertBox, duration: 1, options: .transitionCrossDissolve,
+                           animations: {
+                            self.AlertBox.backgroundColor = UIColor.white
+                           }){finished in
+            // self.AlertBox.textColor = UIColor.white
+        }
+    }
     
     
     //MARK:=================================  UPLOAD IMAGE ==========================================
@@ -479,9 +685,7 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
                 
                 if(error != nil){
                     //  print(String(data: data!, encoding: .utf8) ?? "No response from server")
-                    
                     failure(error!)
-                    
                 }
                 if let responseData = data{
                     do {
@@ -493,12 +697,9 @@ class PharmacyRegisterVC: UIViewController , UIImagePickerControllerDelegate  ,U
                         //    print(err)
                         
                         failure(err)
-                        
                     }
                 }
-                
             }
-            
         }
         task.resume()
     }

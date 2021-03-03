@@ -14,6 +14,7 @@ class LoginViewModel: NSObject {
     func getLoginData(vc:UIViewController,prams:[String:String],success:@escaping (_ response: LoginModel) -> Void){
         Service.shareInstance.webservicesPostRequest2(baseString: Constants.kBaseUrl + Constants.kLogin, parameters: prams , success: { (res) in
             print(res)
+            // live
             if let dic = res.value(forKey: "data") as? NSDictionary{
                 success(LoginModel(
                             id: (dic.value(forKey: "id") ?? "") as! Int,
@@ -22,21 +23,45 @@ class LoginViewModel: NSObject {
                             last_name: "\(dic.value(forKey: "last_name") ?? "")",
                             email: "\(dic.value(forKey: "email") ?? "")",
                             image: "\(dic.value(forKey: "image") ?? "")",
-                            phone: (dic.value(forKey: "phone") ?? "") as! String ,
+                            phone:  "\((dic.value(forKey: "phone") ?? "") as! Int)"  ,
                             role: "\(dic.value(forKey: "role") ?? "")",
-                            status: (dic.value(forKey: "status")  ?? "") as! String,
+                            status:  "\((dic.value(forKey: "status")  ?? "") as! Int)" ,
                             address: "\(dic.value(forKey: "address") ?? "")",
                             longitude: "\(dic.value(forKey: "longitude") ?? "")",
                             latitiude: "\(dic.value(forKey: "latitiude") ?? "")",
                             gender: "\(dic.value(forKey: "gender") ?? "")",
                             dob: "\(dic.value(forKey: "dob") ?? "")",
                             city: "\(dic.value(forKey: "city") ?? "")",
-                            age: (dic.value(forKey: "age") ?? "") as! String,
+                            age:  "\((dic.value(forKey: "age") ?? "") as! Int)" ,
                             token: "\(dic.value(forKey: "token") ?? "")",
                             phoneStatus: (dic.value(forKey: "phone_status") as! String),
                             otp: (dic.value(forKey: "otp") as! String),
                             message: ""))
             }
+            // local
+//            if let dic = res.value(forKey: "data") as? NSDictionary{
+//                success(LoginModel(
+//                            id: (dic.value(forKey: "id") ?? "") as! Int,
+//                            username: "\(dic.value(forKey: "username") ?? "last_name")",
+//                            first_name: "\(dic.value(forKey: "first_name") ?? "")",
+//                            last_name: "\(dic.value(forKey: "last_name") ?? "")",
+//                            email: "\(dic.value(forKey: "email") ?? "")",
+//                            image: "\(dic.value(forKey: "image") ?? "")",
+//                            phone:  "\((dic.value(forKey: "phone") ?? "") as! Int)"  ,
+//                            role: "\(dic.value(forKey: "role") ?? "")",
+//                            status:  "\((dic.value(forKey: "status")  ?? "") as! Int)" ,
+//                            address: "\(dic.value(forKey: "address") ?? "")",
+//                            longitude: "\(dic.value(forKey: "longitude") ?? "")",
+//                            latitiude: "\(dic.value(forKey: "latitiude") ?? "")",
+//                            gender: "\(dic.value(forKey: "gender") ?? "")",
+//                            dob: "\(dic.value(forKey: "dob") ?? "")",
+//                            city: "\(dic.value(forKey: "city") ?? "")",
+//                            age:  "\((dic.value(forKey: "age") ?? "") as! Int)" ,
+//                            token: "\(dic.value(forKey: "token") ?? "")",
+//                            phoneStatus: "\((dic.value(forKey: "phone_status") as! Int))" ,
+//                            otp: (dic.value(forKey: "otp") as! String),
+//                            message: ""))
+//            }
             if let message =  res.value(forKey: "message") as? String{
                 if message == "Check Your credentials"{
                         success(LoginModel(id: 0,
